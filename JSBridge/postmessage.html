@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Post Message</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="apple-touch-fullscreen" content="YES">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <div>
+       <button onclick="postMessage()">Post Message</button>
+    </div>
+
+    <script type="text/javascript">
+        function postMessage() {
+            document.body.style.backgroundColor = "red"
+            var str='{"eventName":"showAlert", "args":[{"param": "from js hello world!"}, "receiveClient"]}'
+            var json = JSON.parse(str);
+            window.webkit.messageHandlers.testApi.postMessage(json)
+        }
+
+        function receiveClient(e, event) {
+
+          window.document.body.style.backgroundColor = event
+        }
+        window.addEventListener("receiveClient", receiveClient, false);
+    </script>
+</body>
+</html>
